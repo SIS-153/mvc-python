@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import time
@@ -33,10 +33,14 @@ def create_app(config_class=None):
     app.register_blueprint(usuario_bp, url_prefix='/usuarios')
     app.register_blueprint(auth_bp, url_prefix='/auth')
     
+    # Manejo de error 404
+    @app.errorhandler(404)
+    def page_not_found(error):
+        return render_template('404.html'), 404
+    
     # Definir la ruta principal
     @app.route('/')
     def index():
-        from flask import render_template
         return render_template('index.html')
     
     # Crear tablas y usuario admin con reintentos
@@ -69,7 +73,7 @@ def crear_usuario_admin():
             direccion='Dirección Administrativa',
             es_admin=True
         )
-        nuevo_admin.set_password('admin123')  
+        nuevo_admin.set_password('admin123')
         try:
             db.session.add(nuevo_admin)
             db.session.commit()
