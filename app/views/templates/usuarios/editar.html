@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Usuario - Tienda de Ropa{% endblock %}
+
+{% block content %}
+    <h1>Editar Usuario</h1>
+    
+    <form method="post" action="{{ url_for('usuarios.editar_usuario', id=usuario.id) }}">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" value="{{ usuario.nombre }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" name="apellido" value="{{ usuario.apellido }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="{{ usuario.email }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" value="{{ usuario.telefono }}">
+        </div>
+        
+        <div class="form-group">
+            <label for="direccion">Dirección</label>
+            <textarea id="direccion" name="direccion" rows="3">{{ usuario.direccion }}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Contraseña (Dejar en blanco para mantener la actual)</label>
+            <input type="password" id="password" name="password">
+        </div>
+        
+        <div class="form-group checkbox">
+            <label>
+                <input type="checkbox" name="es_admin" {% if usuario.es_admin %}checked{% endif %}> Es administrador
+            </label>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+            <a href="{{ url_for('usuarios.listar_usuarios') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+{% endblock %}

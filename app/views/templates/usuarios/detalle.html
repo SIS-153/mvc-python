@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle de Usuario - Tienda de Ropa{% endblock %}
+
+{% block content %}
+    <h1>Detalle de Usuario</h1>
+    
+    <div class="user-details">
+        <p><strong>ID:</strong> {{ usuario.id }}</p>
+        <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
+        <p><strong>Apellido:</strong> {{ usuario.apellido }}</p>
+        <p><strong>Email:</strong> {{ usuario.email }}</p>
+        <p><strong>Teléfono:</strong> {{ usuario.telefono or 'No registrado' }}</p>
+        <p><strong>Dirección:</strong> {{ usuario.direccion or 'No registrada' }}</p>
+        <p><strong>Admin:</strong> {{ 'Sí' if usuario.es_admin else 'No' }}</p>
+        <p><strong>Fecha de registro:</strong> {{ usuario.fecha_registro.strftime('%d/%m/%Y %H:%M') }}</p>
+    </div>
+    
+    <div class="user-actions">
+        <a href="{{ url_for('usuarios.editar_usuario', id=usuario.id) }}" class="btn btn-warning">Editar</a>
+        <form action="{{ url_for('usuarios.eliminar_usuario', id=usuario.id) }}" method="post" class="inline-form">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar este usuario?')">Eliminar</button>
+        </form>
+        <a href="{{ url_for('usuarios.listar_usuarios') }}" class="btn btn-secondary">Volver a la lista</a>
+    </div>
+{% endblock %}

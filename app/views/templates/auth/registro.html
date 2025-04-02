@@ -1,0 +1,82 @@
+<!-- app/app/views/templates/auth/registro.html -->
+{% extends "base.html" %}
+
+{% block title %}Registro - Tienda de Ropa{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Registro de Usuario</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            {{ form.nombre.label(class="form-label") }}
+                            {{ form.nombre(class="form-control") }}
+                            {% for error in form.nombre.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.apellido.label(class="form-label") }}
+                            {{ form.apellido(class="form-control") }}
+                            {% for error in form.apellido.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.email.label(class="form-label") }}
+                        {{ form.email(class="form-control") }}
+                        {% for error in form.email.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            {{ form.telefono.label(class="form-label") }}
+                            {{ form.telefono(class="form-control") }}
+                            {% for error in form.telefono.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.direccion.label(class="form-label") }}
+                            {{ form.direccion(class="form-control") }}
+                            {% for error in form.direccion.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            {{ form.password.label(class="form-label") }}
+                            {{ form.password(class="form-control") }}
+                            {% for error in form.password.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.confirm_password.label(class="form-label") }}
+                            {{ form.confirm_password(class="form-control") }}
+                            {% for error in form.confirm_password.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="d-grid">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <p>¿Ya tienes una cuenta? <a href="{{ url_for('auth.login') }}">Iniciar Sesión</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

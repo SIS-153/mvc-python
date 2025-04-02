@@ -1,0 +1,1 @@
+from app.controllers.usuario_controller import usuario_bp

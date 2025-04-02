@@ -1,0 +1,19 @@
+<!-- app/app/views/templates/index.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Bienvenido a la Tienda de Ropa</h1>
+    
+    {% if current_user.is_authenticated %}
+        <p>Hola, {{ current_user.nombre }}! Gracias por iniciar sesión.</p>
+    {% else %}
+        <p>Para acceder a todas las funciones, por favor <a href="{{ url_for('auth.login') }}">inicia sesión</a> o <a href="{{ url_for('auth.registro') }}">regístrate</a>.</p>
+    {% endif %}
+    
+    <div class="featured-products">
+        <h2>Productos destacados</h2>
+        <p>Próximamente verás aquí nuestros productos destacados...</p>
+    </div>
+</div>
+{% endblock %}

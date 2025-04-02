@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Usuarios - Tienda de Ropa{% endblock %}
+
+{% block content %}
+    <h1>Administración de Usuarios</h1>
+    
+    <div class="actions">
+        <a href="{{ url_for('usuarios.crear_usuario') }}" class="btn btn-primary">Nuevo Usuario</a>
+    </div>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Admin</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.apellido }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.telefono }}</td>
+                    <td>{{ 'Sí' if usuario.es_admin else 'No' }}</td>
+                    <td class="actions">
+                        <a href="{{ url_for('usuarios.ver_usuario', id=usuario.id) }}" class="btn btn-info">Ver</a>
+                        <a href="{{ url_for('usuarios.editar_usuario', id=usuario.id) }}" class="btn btn-warning">Editar</a>
+                        <form action="{{ url_for('usuarios.eliminar_usuario', id=usuario.id) }}" method="post" class="inline-form">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar este usuario?')">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">No hay usuarios registrados.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
